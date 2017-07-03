@@ -1,0 +1,86 @@
+---
+title: Welcome to Megapont
+---
+
+<script>
+var works = [
+  <% @works_array.reverse.each_with_index do |work, index| %>
+    <%=  work.to_json %>,
+  <% end %>
+];
+</script>
+
+
+<div id="top_nav">
+  <div class="bar">
+    <a href="/about.html" id="page_switch">About us</a>
+    <%= partial "/partials/lang_switch" %>
+  </div>
+</div>
+
+<div id="container">
+
+  <div id="content">
+    <div class="work_post" id="works">
+      <div class="header">
+        <%= partial "/partials/navigation" %>
+      </div>
+      <div class="inner_content" id="works_content"></div>
+      <div style="text-align:center">
+        <h2>The End</h2>
+      </div>
+      
+    </div>
+
+    <div class="post" id="about_us">
+      <div class="header">
+        <%= partial "/partials/navigation" %>
+      </div>
+
+      <div class="ru inner_content">\n
+        <%= mgmt "body_ru", {:path => "index.html"} %> 
+      </div>
+      <div class="eng inner_content">
+        <%= mgmt "body_eng", {:path => "index.html"} %>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+
+<div id="overlay">
+  <div class="loading">
+    <section class="module module-piece-detail dark">
+      <div class="media letterbox <%#= @works_array.first.images.first[:letter_box_type] %>"    >
+        <div id="love"></div>
+      </div>
+    </section>
+    <a class="close"><span>×</span></a>
+    <a href="#" id="small_logo"></a>
+
+    <div id="bottomsection">
+      <span class="number">
+        – No. 001 –
+      </span>
+      <a href="#" id="next-image" class="icon icon-angle-right"></a>
+      <a href="#" id="prev-image" class="icon icon-angle-left"></a>
+    </div>
+  </div>
+</div>
+<script type="text/template" id="cardTemplate">
+<div class="cari" style="max-width:{3}px">
+            <a href="works/{0}.html" class="gallery_img_next"  data-index="{0}"><img class="gal_img lazy" src="/images/grey.gif" data-original='/images/works/{2}' width='{3}' height='{4}' ><noscript><img src="/images/works/{2}" width="{3}" heigh="{4}"></noscript><div class="bottomt">
+                <span class="number">
+                  – No. 00{0} –
+                </span>
+                 <span class="title bot">
+                 {1}
+                </span>
+              </div>
+            </a>
+            </div>
+</script>
+

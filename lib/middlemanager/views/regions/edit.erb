@@ -1,0 +1,58 @@
+ <div class="row-fluid">
+    <div class="span2">
+      <!--Sidebar content-->
+    </div>
+    <div class="span10"> 
+  
+  <form class="form-stacked" action="<%= url("/region") %>" method="POST">
+    <% for region in @regions %>
+      <% key_name = MiddleManager::Store.generate_key(region.name, region.path) %>
+
+      <%= region.store_key %>
+      
+      <label>
+        <h3><span style="font-weight: normal">Editing</span> <%= region.name %></h3>
+        <p>
+        <textarea class="xxlarge" id="region" style="margin: 0.5em 0; display:none;" rows="3" name="region_<%= key_name %>"><%= region.value %></textarea>
+        <div id="epiceditor"></div>
+        
+          <span class="help-block">
+            Content will be entered for <b><%= region.name %></b> on <code><%= region.path %></code> <b>(<%= region.title %>)</b>
+          </span>
+        </p>
+      </label>
+    <% end %>
+    
+    <div class="actions">
+      <div style="display: inline-block;">
+        <input class="btn" type="submit" value="Save" />
+      </div>
+      <div style="display: inline-block; margin: 0 0 0 1em;">
+        <a class="cancel" style="color: #9d261d;" href="<%= url('/') %>">Cancel</a>
+      </div>
+    </div>
+  </form>
+
+</div>
+
+<script src="/admin/js/epiceditor.min.js"></script>
+<script>
+$(function() {
+  $('.cancel').click(function() {
+    return confirm("Cancel?");
+  })
+  var opts = {
+  container: 'epiceditor',
+  textarea: "region",
+  focusOnLoad: true,
+  basePath: '/admin',
+  theme: {
+    base:'/themes/base/epiceditor.css',
+    preview:'/themes/preview/preview-dark.css',
+    editor:'/themes/editor/epic-dark.css'
+  }
+  }
+  var editor = new EpicEditor(opts).load();
+});
+  
+</script>

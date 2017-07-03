@@ -1,0 +1,76 @@
+  <div class="row-fluid">
+    <div class="span2">
+      <!--Sidebar content-->
+    </div>
+    <div class="span10">
+  
+  <form class="form-stacked" action="<%= url("/page?key=#{@splat}") %>" method="POST">
+    <% for page in @pages %>
+      <%= page.store_key %>
+      
+        <h3><span style="font-weight: normal">Editing</span> <%= page.name %></h3>
+                  <label>name(permalink)</label>
+                  <input class="span5" type="text" value="<%= page.name %>" name="page[name]">
+                  
+                  <label>title</label>
+                  <input class="span5" type="text" value="<%= page.title %>" name="page[title]">
+                  <label>ru_title</label>
+                  <input class="span5" type="text" value="<%= page.ru_title %>" name="page[ru_title]">
+                  <% if page.category == "work"%>
+                    <% if page.images %>
+                      <% page.images.each do |c| %>
+                        <% Hash[*c.flatten].each do |index, image| %>
+
+                                    <fieldset>
+                                      <legend> <%= image["image_name"]  %> </legend>
+                                <label>bg</label>
+                                <input class="span5" type="text" value="<%= image["bg"] %>" name="page[images][<%= index %>][bg]">
+                                <label>image_name</label>
+                                <input class="span5" type="text" value="<%= image["image_name"]  %>" name="page[images][<%= index %>][image_name]">
+                                <label>axis</label>
+                                <input class="span5" type="text" value="<%= image["axis"]  %>" name="page[images][<%= index %>][axis]">
+                                <label>letter_box_type</label>
+                                <input class="span5" type="text" value="<%= image["letter_box_type"]  %>" name="page[images][<%= index %>][letter_box_type]">
+                                </fieldset>
+                                <% end %>
+              <% end %>
+<%else%>
+
+  <p>Add new image</p>
+                      <fieldset>
+                  <label>bg</label>
+                  <input class="span5" type="text" value="" name="page[images][0][bg]">
+                  <label>image_name</label>
+                  <input class="span5" type="text" value="" name="page[images][0][image_name]">
+                  <label>axis</label>
+                  <input class="span5" type="text" value="" name="page[images][0][axis]">
+                  <label>letter_box_type</label>
+                  <input class="span5" type="text" value="" name="page[images][0][letter_box_type]">
+                  </fieldset>
+          <% end %>
+          <% end %>
+        
+          <span class="help-block">
+            Content will be entered for <b><%= page.category %></b> on <code><%= page.category %></code> <b>(<%= page.title %>)</b>
+          </span>
+
+    <% end %>
+    
+    <div class="actions">
+      <div style="display: inline-block;">
+        <input class="btn" type="submit" value="Save" />
+      </div>
+      <div style="display: inline-block; margin: 0 0 0 1em;">
+        <a class="cancel" style="color: #9d261d;" href="<%= url('/') %>">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+</div>
+
+<script>
+  $('.cancel').click(function() {
+    return confirm("Cancel?");
+  })
+</script>
+

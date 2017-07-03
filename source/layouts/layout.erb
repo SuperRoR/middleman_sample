@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+  <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag 'main' %>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+  <title><%= data.page.title || current_resource.metadata[:title] || "The Middleman" %></title>
+  </head>
+
+  <body class="<%= page_classes %>">
+    <%= yield %>
+  </body>
+</html>
